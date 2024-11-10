@@ -31,7 +31,9 @@ export default class Cl_oficina {
     }
 
     montoFinalDisponible() {
-        return this.montoCaja - this.prestamos.reduce((total, prestamo) => total + prestamo.monto, 0);
+        for (let i = 0; i < this.prestamos.length; i++) {
+            return this.montoCaja -= this.prestamos[i].monto;
+        }
     }
 
     prestamosPorDosMeses() {
@@ -39,8 +41,12 @@ export default class Cl_oficina {
     }
 
     prestamoMinimo() {
-        let menor = infinity;
-        return this.prestamos.filter((prestamo) => prestamo.monto <= menor
-            ? menor = prestamo.monto : menor);
+        let menor = this.prestamos[0].monto;
+        for (let i = 1; i < this.prestamos.length; i++) {
+            if (this.prestamos[i].monto < menor) {
+                menor = this.prestamos[i].monto;
+            }
+        }
+        return menor;
     }
 }
