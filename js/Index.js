@@ -28,7 +28,52 @@ Dt_Prestamos.forEach((prestamo) => oficina.agregarPrestamo(
     new Cl_Prestamo(prestamo.cliente, prestamo.codigo, prestamo.prestamo, prestamo.meses)
 ));
 
-let montoFinalDisponible = () => {
+let montoFinalDisponible = (oficina, salida) => {
     let prestamos = oficina.prestamosPorDosMeses();
-    
+    salida.innerHTML = `Los préstamos por 2 meses son:`;
+    prestamos.forEach((prestamo) => {
+        salida.innerHTML += `<br>${prestamo.nombre} ${prestamo.monto}`;
+    });
+}
+
+let prestamoMinimo = (oficina, salida) => {
+    let prestamos = oficina.prestamoMinimo();
+    salida.innerHTML = `El préstamo pequeño es:`;
+    prestamos.forEach((prestamos) => {
+        salida.innerHTML += `<br>$${prestamos.monto}`;
+    });
+}
+
+let montFinDispo = (oficina, salida) => {
+    let prestamos = oficina.montoFinalDisponible();
+    salida.innerHTML = `El monto final disponible es:`;
+    prestamos.forEach((prestamos) => {
+        salida.innerHTML += `<br>$${prestamos.monto}`;
+    });
+}
+
+let salida1 = document.getElementById("salida1");
+let salida2 = document.getElementById("salida2");
+let opciones = document.getElementById("opciones");
+
+salida1.innerHTML = `<p>Seleccione una opción: <br>
+                        1. Monto final disponible <br>
+                        2. Clientes que pidieron por 2 meses <br>
+                        3. Clientes que pidieron el préstamo mínimo
+                        </p>
+                    `;
+
+opciones.onclick = () => {
+    let opcion = prompt("Ingrese la opció seleccionada: ");
+    switch (opcion) {
+        case "1":
+            montFinDispo(oficina, salida2); 
+        break; 
+        case "2": 
+            montoFinalDisponible(oficina, salida2); 
+        break;
+        case "3": 
+            prestamoMinimo(oficina, salida2); 
+        break;
+    }
 }

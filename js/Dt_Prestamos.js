@@ -1,4 +1,4 @@
-export default Dt_pretamos = [
+const Dt_pretamos = [
     {
     cliente: 'Luis',
     codigo: 1111,
@@ -18,3 +18,5 @@ export default Dt_pretamos = [
     meses: 5
     }
 ]
+
+export default Dt_pretamos

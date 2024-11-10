@@ -39,6 +39,8 @@ export default class Cl_oficina {
     }
 
     prestamoMinimo() {
-
+        let menor = infinity;
+        return this.prestamos.filter((prestamo) => prestamo.monto <= menor
+            ? menor = prestamo.monto : menor);
     }
 }
