@@ -26,7 +26,6 @@ const oficina = new Cl_Oficina(Dt_Oficina.montoCaja, Dt_Oficina.porcComisionMens
 const salida1 = document.getElementById("salida1");
 const salida2 = document.getElementById("salida2");
 const opciones = document.getElementById("opciones");
-const sectionOpciones = document.getElementById("sectionOpciones");
 const sectionResultados = document.getElementById("sectionResultados");
 
 let nombre
@@ -66,19 +65,12 @@ let prestamosPorDosMeses = (oficina, salida) => {
 }
 
 let prestamoMinimo = (oficina, salida) => {
-    let prestamos = oficina.prestamoMinimo();
-    salida.innerHTML = `El préstamo pequeño es:`;
-    prestamos.forEach((prestamo) => {
-        salida.innerHTML += `<br>$${prestamo.monto}`;
-    });
+    salida.innerHTML = `El préstamo pequeño es:$${oficina.prestamoMinimo()}`;
+    ;
 }
 
 let montoFinalDisponible = (oficina, salida) => {
-    let prestamos = oficina.montoFinalDisponible();
-    salida.innerHTML = `El monto final disponible es:`;
-    prestamos.forEach((prestamo) => {
-        salida.innerHTML += `<br>$${prestamo.monto}`;
-    });
+    salida.innerHTML = `El monto final disponible es:$${oficina.montoFinalDisponible()}`;
 }
 
 salida1.innerHTML = `<h1>Oficina de prestamos</h1>

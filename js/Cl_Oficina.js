@@ -6,7 +6,7 @@ export default class Cl_oficina {
     }
 
     set montoCaja(montoCaja) {
-        this._montoCaja = montoCaja;
+        this._montoCaja = +montoCaja;
     }
 
     get montoCaja() {
@@ -15,7 +15,7 @@ export default class Cl_oficina {
 
     
     set porcComisionMensual(porcComisionMensual) {
-        this._porcComisionMensual = porcComisionMensual;
+        this._porcComisionMensual = +porcComisionMensual;
     }
 
     get porcComisionMensual() {
@@ -31,9 +31,13 @@ export default class Cl_oficina {
     }
 
     montoFinalDisponible() {
-        for (let i = 0; i < this.prestamos.length; i++) {
-            return this.montoCaja -= this.prestamos[i].monto;
-        }
+        let montoPrestamos = 0;
+        let montoFinal = 0;
+        this.prestamos.forEach((prestamo) => {
+            montoPrestamos += Number(prestamo.monto);
+        });
+        montoFinal = this.montoCaja - montoPrestamos;
+        return montoFinal;
     }
 
     prestamosPorDosMeses() {
