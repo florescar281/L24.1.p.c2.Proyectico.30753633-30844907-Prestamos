@@ -27,11 +27,15 @@ const salida1 = document.getElementById("salida1");
 const salida2 = document.getElementById("salida2");
 const salida3 = document.getElementById("salida3");
 const opciones = document.getElementById("opciones");
-const volverInicio = document.getElementById("Inicio");
+const volverInicioResultados = document.getElementById("InicioResultados");
+const volverInicioPrestamos = document.getElementById("InicioPrestamos");
 const sectionOpciones = document.getElementById("sectionOpciones");
 const sectionResultados = document.getElementById("sectionResultados");
 const sectionTablaPrestamos = document.getElementById("SectiontablaDePrestamos");
 const tablaDePrestamos = document.getElementById("tablaPrestamosRegistrados");
+
+sectionResultados.style.display = "none";
+sectionTablaPrestamos.style.display = "none";
 
 Dt_Prestamos.forEach((prestamo) => { 
     oficina.agregarPrestamo(
@@ -60,25 +64,27 @@ let prestamosPorDosMeses = (oficina, salida) => {
     prestamos.forEach((prestamo) => {
         salida.innerHTML += `<br>${prestamo.nombre} por un monto de $${prestamo.monto}`;
     });
-    
-    mostrarSectionResultados();
 }
 
 let prestamoMinimo = (oficina, salida) => {
     salida.innerHTML = `El préstamo pequeño es:$${oficina.prestamoMinimo()}`;
-    ;
-    
-    mostrarSectionResultados();
 }
 
 let MontoFinalDisponible = (oficina, salida) => {
-    salida.innerHTML = `El monto final disponible es: $${oficina.montoFinalDisponible()}`;
-    
-    mostrarSectionResultados();
+    salida.innerHTML = `El monto final disponible es: $${oficina.montoFinalDisponible(Dt_Oficina.montoDisponible)}`;
 }
 
 let mostrarPrestamos = (oficina, salida, tablaDePrestamos) => {
     salida.innerHTML = `Los préstamos son:`;
+    tablaDePrestamos.innerHTML = `
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Codigo</th>
+                                        <th>Monto</th>
+                                        <th>Meses</th>
+                                        <th>Total a pagar</th>
+                                    </tr>
+                            `;
     oficina.prestamos.forEach((prestamo) => {
         tablaDePrestamos.innerHTML += `<tr>
                                 <td>${prestamo.nombre}</td>
@@ -89,8 +95,6 @@ let mostrarPrestamos = (oficina, salida, tablaDePrestamos) => {
                             </tr>
                             `;
     });
-
-    mostrarTablaPrestamos();
 }
 
 let modificarPrestamo = (oficina) => {
@@ -110,21 +114,21 @@ let modificarPrestamo = (oficina) => {
 }
 
 let mostrarOpciones = () => {
-    sectionOpciones.hidden = false;
-    sectionResultados.hidden = true;
-    sectionTablaPrestamos.hidden = true;
+    sectionOpciones.style.display = "flex";
+    sectionResultados.style.display = "none";
+    sectionTablaPrestamos.style.display = "none";
 }
 
 let mostrarTablaPrestamos = () => {
-    sectionResultados.style.display = true;
-    sectionOpciones.style.display = true;
-    sectionTablaPrestamos.hidden = false;
+    sectionTablaPrestamos.style.display = "flex";
+    sectionOpciones.style.display = "none";
+    sectionResultados.style.display = "none";
 }
 
 let mostrarSectionResultados = () => {
-    sectionResultados.hidden = false;
-    sectionTablaPrestamos.hidden = true;
-    sectionOpciones.hidden = true;
+    sectionResultados.style.display = "flex";
+    sectionOpciones.style.display = "none";
+    sectionTablaPrestamos.style.display = "none";
 }
 
 salida1.innerHTML = `<h1>Oficina de prestamos</h1>
@@ -140,9 +144,14 @@ salida1.innerHTML = `<h1>Oficina de prestamos</h1>
                         </p>
                     `;
 
-volverInicio.onclick = () => {
+volverInicioResultados.onclick = () => {
     mostrarOpciones();
 }
+
+volverInicioPrestamos.onclick = () => {
+    mostrarOpciones();
+}
+
 opciones.onclick = () => {
     let opcion = prompt("Ingrese la opció seleccionada: ");
     switch (opcion) {
@@ -153,15 +162,19 @@ opciones.onclick = () => {
             eliminarPrestamo();
             break;
         case "3":
+            mostrarSectionResultados();
             MontoFinalDisponible(oficina, salida2);
             break;
         case "4":
+            mostrarSectionResultados();
             prestamosPorDosMeses(oficina, salida2);
             break;
         case "5":
+            mostrarSectionResultados();
             prestamoMinimo(oficina, salida2);  
             break;
         case "6":
+            mostrarTablaPrestamos();
             mostrarPrestamos(oficina, salida3, tablaDePrestamos);
             break;
         case "7":

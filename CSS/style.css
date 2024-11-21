@@ -59,7 +59,7 @@ button:hover {
     border: #872ADB solid 4px;
 }
 
-#sectiontablaPrestamos  {    
+#SectiontablaDePrestamos  {    
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -70,4 +70,15 @@ button:hover {
     margin-top: 100px;
     border-radius: 40px;
     border: #872ADB solid 4px;
+}
+
+table {
+    margin-top: 20px;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
 }

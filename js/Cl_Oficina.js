@@ -29,7 +29,8 @@ export default class Cl_oficina {
         this.prestamos = this.prestamos.findIndex((prestamo) => prestamo.codigo == codigo);
     }
 
-    montoFinalDisponible() {
+    montoFinalDisponible(montoDisponible) {
+        this.montoDisponible = +montoDisponible;
         this.prestamos.forEach((prestamo) => {
             this.montoDisponible -= prestamo.monto;
         });
