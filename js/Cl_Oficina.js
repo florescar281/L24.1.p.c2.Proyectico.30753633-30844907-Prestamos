@@ -1,18 +1,17 @@
 export default class Cl_oficina {
-    constructor(montoCaja, porcComisionMensual) {
+    constructor(montoDisponible, porcComisionMensual) {
         this.prestamos = [];
-        this.montoCaja = montoCaja;
+        this.montoDisponible = montoDisponible;
         this.porcComisionMensual = porcComisionMensual;
     }
 
-    set montoCaja(montoCaja) {
-        this._montoCaja = +montoCaja;
+    set montoDisponible(montoDisponible) {
+        this._montoDisponible = +montoDisponible;
     }
 
-    get montoCaja() {
-        return this._montoCaja;
+    get montoDisponible() {
+        return this._montoDisponible;
     }  
-
     
     set porcComisionMensual(porcComisionMensual) {
         this._porcComisionMensual = +porcComisionMensual;
@@ -31,13 +30,10 @@ export default class Cl_oficina {
     }
 
     montoFinalDisponible() {
-        let montoPrestamos = 0;
-        let montoFinal = 0;
         this.prestamos.forEach((prestamo) => {
-            montoPrestamos += Number(prestamo.monto);
+            this.montoDisponible -= prestamo.monto;
         });
-        montoFinal = this.montoCaja - montoPrestamos;
-        return montoFinal;
+        return this.montoDisponible;
     }
 
     prestamosPorDosMeses() {
@@ -52,5 +48,21 @@ export default class Cl_oficina {
             }
         }
         return menor;
+    }
+
+    modificarPrestamo(codigo, prestamo) {
+        for (let i = 0; i < this.prestamos.length; i++) {
+            if (this.prestamos[i].codigo == codigo) {
+                this.prestamos[i] = prestamo;
+            }
+        }
+    }
+
+    buscarPrestamo(codigo) {
+        return this.prestamos.find((prestamo) => prestamo.codigo == codigo);
+    }
+
+    totalPagarPrestamo(prestamo) {
+        return prestamo.monto + prestamo.monto * this.porcComisionMensual * prestamo.meses / 100;
     }
 }

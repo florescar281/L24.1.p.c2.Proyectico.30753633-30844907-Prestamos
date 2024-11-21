@@ -1,9 +1,10 @@
 export default class Cl_Prestamo{
-    constructor(nombre, codigo, monto, meses){
+    constructor(nombre, codigo, monto, meses, totalPagarPrestamo){
         this.nombre = nombre;
         this.codigo = codigo;
         this.monto = monto;
         this.meses = meses;
+        this.totalPagarPrestamo = totalPagarPrestamo;
     }
 
     set nombre(nombre){
@@ -36,5 +37,13 @@ export default class Cl_Prestamo{
 
     get meses(){
         return this._meses;
+    }
+
+    set totalPagarPrestamo(totalPagarPrestamo){
+        this._totalPagarPrestamo = +totalPagarPrestamo;
+    }
+
+    get totalPagarPrestamo(){
+        return this._totalPagarPrestamo;
     }
 }
